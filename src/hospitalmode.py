@@ -26,3 +26,8 @@ def main(id):
             print("Enter the id of the record of the treatment you want to delete.(Allowed to delete only past treatments)")
             id=int(input("Enter the id:"))
             user.qretiever(f"DELETE FROM Recovered_People WHERE recovered_people_id={id}")
+        elif choice==4:
+            return
+        elif choice==5:
+            exit()
+    

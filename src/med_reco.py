@@ -3,9 +3,7 @@ username = 'root'
 password = 'rouTer'
 host = 'localhost'
 database = 'healthrecord'
-trigerpy={
-    "userlogin":f""
-}
+
 def connect_Server(retrievekey):
     # Define the database connection parameters
     
@@ -22,7 +20,7 @@ def connect_Server(retrievekey):
     cursor = cnx.cursor()
 
     # Execute a query
-    query = "SELECT * FROM users"
+    query = "SELECT * FROM users;"
     cursor.execute(query)
 
     # Fetch the results
@@ -35,7 +33,7 @@ def connect_Server(retrievekey):
     # Close the cursor and connection
     cursor.close()
     cnx.close()
-def check_user(query):
+def qretiever(query):
     # Define the database connection parameters
     # Create a connection object
     cnx = mysql.connector.connect(
@@ -50,4 +48,40 @@ def check_user(query):
     cursor.execute(query)
     # Fetch the results
     results = cursor.fetchall()
+    cursor.close()
+    cnx.close()
     return results
+def insertvalue(query):
+    # Define the database connection parameters
+    # Create a connection object
+    cnx = mysql.connector.connect(
+        user=username,
+        password=password,  
+        host=host,
+        database=database
+        )
+    # Create a cursor object
+    cursor = cnx.cursor()
+    # Execute a query
+    cursor.execute(query)
+    # Commit the change
+    cnx.commit()
+    cursor.close()
+    cnx.close()
+def deletevalue(query):
+    # Define the database connection parameters
+    # Create a connection object
+    cnx = mysql.connector.connect(
+        user=username,
+        password=password,
+        host=host,
+        database=database
+        )
+    # Create a cursor object
+    cursor = cnx.cursor()
+    # Execute a query
+    cursor.execute(query)
+    # Commit the change
+    cnx.commit()
+    cursor.close()
+    cnx.close()
