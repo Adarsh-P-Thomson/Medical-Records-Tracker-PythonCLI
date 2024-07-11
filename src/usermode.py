@@ -1,15 +1,16 @@
-
 import src.med_reco as user
+
 def main(id):
-    profile=user.qretiever(f"SELECT * FROM Aadhaar WHERE aadhar={id};")
-    pastreat=user.qretiever(f"SELECT * FROM Recovered_People WHERE patient_id={id};")
-    pretreat=user.qretiever(f"SELECT * FROM Currently_Under_Treatment WHERE patient_id={id};")
+    profile = user.qretiever(f"SELECT * FROM Aadhaar WHERE aadhar={id};")
+    past_treatments = user.qretiever(f"SELECT * FROM Recovered_People WHERE patient_id={id};")
+    present_treatments = user.qretiever(f"SELECT * FROM Currently_Under_Treatment WHERE patient_id={id};")
+
     while True:
         print("========================================")
-        print("Welcome to the Medical Record System -User")
+        print("Welcome to the Medical Record System - User")
         print("========================================")
         print("PROFILE:")
-        print (profile)
+        print(profile)
         print("========================================")
         print("1. Show all treatments")
         print("2. Show present undergoing treatments")
@@ -19,12 +20,26 @@ def main(id):
         print("========================================")
         choice = int(input("Enter your choice: "))
         print("========================================")
+
         if choice == 1:
-            print(pastreat)
-            print(pretreat)
-        elif choice==2:
-            print(pretreat)
-        elif choice==3:
-            print("Enter the id of the record of the treatment you want to delete.(Allowed to delete only past treatments)")
-            id=int(input("Enter the id:"))
-            user.qretiever(f"DELETE FROM Recovered_People WHERE recovered_people_id={id}")
+            print("Past treatments:")
+            print(past_treatments)
+            print("Present treatments:")
+            print(present_treatments)
+        elif choice == 2:
+            print("Present treatments:")
+            print(present_treatments)
+        elif choice == 3:
+            print("Enter the id of the record of the treatment you want to delete. (Allowed to delete only past treatments)")
+            treatment_id = int(input("Enter the id: "))
+            user.deletevalue(f"DELETE FROM Recovered_People WHERE recovered_people_id={treatment_id}")
+            print("Record deleted successfully!")
+        elif choice == 4:
+            print("Logging out...")
+            return
+            break
+        elif choice == 5:
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
