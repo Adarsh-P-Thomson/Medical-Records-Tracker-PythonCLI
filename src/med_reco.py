@@ -5,9 +5,6 @@ host = 'localhost'
 database = 'healthrecord'
 
 def connect_Server(retrievekey):
-    # Define the database connection parameters
-    
-
     # Create a connection object
     cnx = mysql.connector.connect(
         user=username,
@@ -15,24 +12,20 @@ def connect_Server(retrievekey):
         host=host,
         database=database
     )
-
     # Create a cursor object
     cursor = cnx.cursor()
-
     # Execute a query
     query = "SELECT * FROM users;"
     cursor.execute(query)
-
     # Fetch the results
     results = cursor.fetchall()
-
     # Print the results
     for row in results:
         print(row)
-
     # Close the cursor and connection
     cursor.close()
     cnx.close()
+    
 def qretiever(query):
     # Define the database connection parameters
     # Create a connection object
@@ -51,6 +44,7 @@ def qretiever(query):
     cursor.close()
     cnx.close()
     return results
+
 def insertvalue(query):
     # Define the database connection parameters
     # Create a connection object
@@ -68,6 +62,7 @@ def insertvalue(query):
     cnx.commit()
     cursor.close()
     cnx.close()
+
 def deletevalue(query):
     # Define the database connection parameters
     # Create a connection object
