@@ -40,7 +40,7 @@ def main():
         elif choice == 2:#user to delete
             aad=int(input("Enter the aadhar card no. to delete:"))
             try:
-                query=f"DELETE FROM Aadhar WHERE aadhar={aad};"
+                query=f"DELETE FROM Aadhaar WHERE aadhar={aad};"
                 med.deletevalue(query)
             except:
                 print("Error! Unable to Delete")
