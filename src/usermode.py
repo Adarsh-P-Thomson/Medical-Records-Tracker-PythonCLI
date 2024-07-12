@@ -1,6 +1,7 @@
 import src.med_reco as user
 
 def main(id):
+    q=f"SELECT * FROM Aadhaar WHERE aadhar={id};"
     profile = user.qretiever(f"SELECT * FROM Aadhaar WHERE aadhar={id};")
     past_treatments = user.qretiever(f"SELECT * FROM Recovered_People WHERE patient_id={id};")
     present_treatments = user.qretiever(f"SELECT * FROM Currently_Under_Treatment WHERE patient_id={id};")
@@ -10,7 +11,8 @@ def main(id):
         print("Welcome to the Medical Record System - User")
         print("========================================")
         print("PROFILE:")
-        print(profile)
+        
+        user.display(q)
         print("========================================")
         print("1. Show all treatments")
         print("2. Show present undergoing treatments")

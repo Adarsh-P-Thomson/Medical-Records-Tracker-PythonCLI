@@ -58,8 +58,8 @@ def add_new_patient(id):
 
     if treatment_status == "1":
         query=f"INSERT INTO Currently_Under_Treatment (hospital_id, patient_id, start_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{drugs_taken}');"
-        user.query_retriever(query)
+        user.qretiever(query)
     else:
         end_date = input("Enter treatment end date (yyyy-mm-dd): ")
         query=f"INSERT INTO Recovered_People (hospital_id, patient_id, start_date, recovery_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{end_date}', '{drugs_taken}');"
-        user.query_retriever(query)
+        user.qretriever(query)

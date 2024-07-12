@@ -22,12 +22,12 @@ def main():
         print("======================================")
         choice = int(input("Enter your choice: "))
         if choice == 1:#add new user
-            aad=input("Enter the aadhar card no.:")
+            aad=int(input("Enter the aadhar card no.:"))
             firstname=input("Enter the name:")
             lastname=input("Enter the last name:")
             dob=input("Enter the date of Birth:(yyyy-mm-dd):")
             gender=input("Enter the gender:")
-            contact=int(input("Enter the contact no.:"))
+            contact=(input("Enter the contact no.:"))
             address=input("Enter the residence address:")
             try:
                 query=f"INSERT INTO Aadhaar (aadhar,first_name,last_name,dob,gender,contact_info,address) VALUES({aad},'{firstname}','{lastname}','{dob}','{gender}','{contact}','{address}');"
@@ -100,33 +100,53 @@ def main():
                 print("Invalid choice")
         
         elif choice == 4:#add hospital
-            hospital_id = int(input("Enter the hospital id: "))
             hospital_name = input("Enter the hospital name: ")
+            hospital_address = input("Enter the hospital address: ")
+            hospital_contact = input("Enter the hospital contact number: ")
             try:
-                query=f"INSERT INTO Hospital (hospital_id, hospital_name) VALUES ({hospital_id}, '{hospital_name}');"
+                query=f"INSERT INTO Hospital_Details (hospital_name,location,contact_info) VALUES ( '{hospital_name}','{hospital_address}','{hospital_contact}');"
                 med.insertvalue(query)
-            except:
+                
+            except :
                 print("Error")
                 continue
             print("Hospital Added successfully.")
         
         elif choice == 5:#delete hospital
-            hospital_id = int(input("Enter the hospital id to delete: "))
+            hospital_id = int(input("Enter the user id of the hospital to delete: "))
             try:
-                query=f"DELETE FROM Hospital WHERE hospital_id = {hospital_id};"
+                query=f"DELETE FROM Hospital_Details WHERE user_id = {hospital_id};"
                 med.deletevalue(query)
             except:
                 print("Error! Unable to Delete")
+            print("record deleted successfully!!")
         
         elif choice == 6:#update hospital
+            hospital_id = int(input("Enter the user id of the hospital to update: "))
             print("Enter what data would you like to change: ")
             print("1.Hospital Name")
+            print("2.Hospital Address")
+            print("3.Hospital Contact Number")
             choice_update = int(input("Enter your choice: "))
-            hospital_id = int(input("Enter the hospital id to update: "))
             if choice_update == 1:
                 new_hospital_name = input("Enter the new hospital name: ")
                 try:
-                    query=f"UPDATE Hospital SET hospital_name = '{new_hospital_name}' WHERE hospital_id = {hospital_id};"
+                    query=f"UPDATE Hospital_Details SET hospital_name = '{new_hospital_name}' WHERE user_id = {hospital_id};"
+                    med.updatevalue(query)
+                except:
+                    print("Error! Unable to Update")
+            elif choice_update == 2:
+                    new_hospital_name = input("Enter the new hospital address: ")
+                    try:
+                        query=f"UPDATE Hospital_Details SET location= '{hospital_address}' WHERE user_id = {hospital_id};"
+                        med.updatevalue(query)
+                    except:
+                        print("Error! Unable to Update")
+                    print("updated successfully")
+            elif choice_update == 3:
+                new_hospital_name = input("Enter the new hospital contact number: ")
+                try:
+                    query=f"UPDATE Hospital_Details SET contact_info = '{hospital_contact}' WHERE user_id = {hospital_id};"
                     med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
@@ -143,9 +163,9 @@ def main():
                     last_name = f"{result[0][1]}"
                     contact_info = result[0][2]
                     hospital_id = int(input("Enter the hospital id: "))
-                    specialization=input("Enter doctor specialization")
+                    specialization=input("Enter doctor specialization:")
                     try:
-                        query1=f"INSERT INTO Doctors (doctor_id, first_name,last_name,contact_info, hospital_id, contact_info, specialization) VALUES ({doctor_id}, '{first_name}','{last_name}', {hospital_id}, '{contact_info}', '{specialization}');"
+                        query1=f"INSERT INTO Doctors ( first_name,last_name, hospital_id, contact_info, specialization,aadhar_number) VALUES ( '{first_name}','{last_name}', {hospital_id}, '{contact_info}', '{specialization}','{doctor_id}');"
                         med.insertvalue(query1)
                     except:
                         print("Error")
@@ -162,14 +182,17 @@ def main():
                 med.deletevalue(query)
             except:
                 print("Error! Unable to Delete")
+            print("DELETED SUCCESSFULLY")
         
         elif choice == 9:#change doctors working hospital
+            doctor_id = int(input("Enter the doctor id: "))
             new_hospital_id = int(input("Enter the new hospital id:"))
             try:
                 query=f"UPDATE Doctors SET hospital_id = {new_hospital_id} WHERE doctor_id = {doctor_id};"
                 med.updatevalue(query)
             except:
-                print("Error! Unable to Update")      
+                print("Error! Unable to Update")
+            print("UPDATED SUCCESSFULLY")      
         elif choice == 10:
             print("Logging out...")
             stat = False
