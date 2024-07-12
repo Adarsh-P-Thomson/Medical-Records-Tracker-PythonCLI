@@ -46,7 +46,8 @@ def delete_patient_record(id, past_treatments):
     print("Enter the id of the record of the treatment you want to delete.")
     print(past_treatments)
     record_id = int(input("Enter the id: "))
-    user.query_retriever(f"DELETE FROM Recovered_People WHERE recovered_people_id={record_id};")
+    query=f"DELETE FROM Recovered_People WHERE recovered_people_id={record_id};"
+    user.query_retriever(query)
 
 def add_new_patient(id):
     patient_id = int(input("Enter the id of the patient: "))
@@ -56,7 +57,9 @@ def add_new_patient(id):
     treatment_status = input("Enter 1 if still under treatment or 2 if has recovered: ")
 
     if treatment_status == "1":
-        user.query_retriever(f"INSERT INTO Currently_Under_Treatment (hospital_id, patient_id, start_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{drugs_taken}');")
+        query=f"INSERT INTO Currently_Under_Treatment (hospital_id, patient_id, start_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{drugs_taken}');"
+        user.query_retriever(query)
     else:
         end_date = input("Enter treatment end date (yyyy-mm-dd): ")
-        user.query_retriever(f"INSERT INTO Recovered_People (hospital_id, patient_id, start_date, recovery_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{end_date}', '{drugs_taken}');")
+        query=f"INSERT INTO Recovered_People (hospital_id, patient_id, start_date, recovery_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{end_date}', '{drugs_taken}');"
+        user.query_retriever(query)

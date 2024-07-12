@@ -32,7 +32,8 @@ def main(id):
         elif choice == 3:
             print("Enter the id of the record of the treatment you want to delete. (Allowed to delete only past treatments)")
             treatment_id = int(input("Enter the id: "))
-            user.deletevalue(f"DELETE FROM Recovered_People WHERE recovered_people_id={treatment_id}")
+            query=f"DELETE FROM Recovered_People WHERE recovered_people_id={treatment_id};"
+            user.deletevalue(query)
             print("Record deleted successfully!")
         elif choice == 4:
             print("Logging out...")

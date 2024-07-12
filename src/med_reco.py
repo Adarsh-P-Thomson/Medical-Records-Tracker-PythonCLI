@@ -80,3 +80,6 @@ def deletevalue(query):
     cnx.commit()
     cursor.close()
     cnx.close()
+
+def updatevalue(query):
+    insertvalue(query)

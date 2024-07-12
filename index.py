@@ -18,7 +18,8 @@ while True:
         print("=======================================")
         id = int(input("Enter your Aadhar card no.: "))
         password = input("Enter your Password: ")
-        if sqlcon.qretiever(f"SELECT password FROM Users WHERE aadhar={id};")[0] == password:
+        query=f"SELECT password FROM Users WHERE aadhar = {id};"
+        if sqlcon.qretiever(query )[0][0] == password:
             userer.main(id)
         else:
             print("Invalid Credentials")
@@ -27,7 +28,8 @@ while True:
         username = input("Enter Hospital username: ")
         id = int(input("Enter your Hospital id no.: "))
         password = input("Enter your Password: ")
-        if sqlcon.qretiever(f"SELECT password FROM Hospitals WHERE login_id={id} AND username={username};")[0] == password:
+        query=f"SELECT password FROM Hospitals WHERE login_id={id} AND username='{username}';"
+        if sqlcon.qretiever(query)[0][0] == password:
             hos.main(id)
         else:
             print("Invalid Credentials")
@@ -36,8 +38,9 @@ while True:
         username = input("Enter Admin username: ")
         id = int(input("Enter your Admin Aadhar id no.: "))
         password = input("Enter your Password: ")
-        if sqlcon.qretiever(f"SELECT password FROM Admins WHERE aadhar={id} AND username={username};")[0] == password:
-            adm.main(id, username)
+        query=f"SELECT password FROM Admins WHERE aadhar={id} AND username='{username}';"
+        if sqlcon.qretiever(query)[0][0] == password:
+            adm.main()
         else:
             print("Invalid Credentials")
     elif mode == 4:

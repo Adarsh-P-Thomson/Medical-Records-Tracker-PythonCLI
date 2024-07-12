@@ -21,9 +21,6 @@ def main():
         print("11. Exit")
         print("======================================")
         choice = int(input("Enter your choice: "))
-        if choice not in ( i in range (1,15)):
-            print("Invalid choice")
-            continue
         if choice == 1:#add new user
             aad=input("Enter the aadhar card no.:")
             firstname=input("Enter the name:")
@@ -33,8 +30,8 @@ def main():
             contact=int(input("Enter the contact no.:"))
             address=input("Enter the residence address:")
             try:
-                med.insertvalue(f"INSERT INTO Aadhaar (aadhar,first_name,last_name,dob,gender,contact_info,address)
-                            VALUES({aad},{firstname},{lastname},{dob},{gender},{contact},{address});")
+                query=f"INSERT INTO Aadhaar (aadhar,first_name,last_name,dob,gender,contact_info,address) VALUES({aad},'{firstname}','{lastname}','{dob}','{gender}','{contact}','{address}');"
+                med.insertvalue(query)
             except:
                 print("Error")
                 continue
@@ -43,7 +40,8 @@ def main():
         elif choice == 2:#user to delete
             aad=int(input("Enter the aadhar card no. to delete:"))
             try:
-                med.deletevalue(f"DELETE FROM Aadhar WHERE aadhar={aad};")
+                query=f"DELETE FROM Aadhar WHERE aadhar={aad};"
+                med.deletevalue(query)
             except:
                 print("Error! Unable to Delete")
         elif choice==3:#update user data
@@ -59,37 +57,43 @@ def main():
             if choice_update == 1:
                 new_name = input("Enter the new name: ")
                 try:
-                    med.updatevalue(f"UPDATE Aadhaar SET first_name = '{new_name}' WHERE aadhar = {aad};")
+                    query=f"UPDATE Aadhaar SET first_name = '{new_name}' WHERE aadhar = {aad};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             elif choice_update == 2:
                 new_lastname = input("Enter the new last name: ")
                 try:
-                    med.updatevalue(f"UPDATE Aadhaar SET last_name = '{new_lastname}' WHERE aadhar = {aad};")
+                    query=f"UPDATE Aadhaar SET last_name = '{new_lastname}' WHERE aadhar = {aad};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             elif choice_update == 3:
                 new_dob = input("Enter the new date of birth (yyyy-mm-dd): ")
                 try:
-                    med.updatevalue(f"UPDATE Aadhaar SET dob = '{new_dob}' WHERE aadhar = {aad};")
+                    query=f"UPDATE Aadhaar SET dob = '{new_dob}' WHERE aadhar = {aad};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             elif choice_update == 4:
                 new_gender = input("Enter the new gender: ")
                 try:
-                    med.updatevalue(f"UPDATE Aadhaar SET gender = '{new_gender}' WHERE aadhar = {aad};")
+                    query=f"UPDATE Aadhaar SET gender = '{new_gender}' WHERE aadhar = {aad};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             elif choice_update == 5:
                 new_contact = int(input("Enter the new contact number: "))
                 try:
-                    med.updatevalue(f"UPDATE Aadhaar SET contact_info = {new_contact} WHERE aadhar = {aad};")
+                    query=f"UPDATE Aadhaar SET contact_info = '{new_contact}' WHERE aadhar = {aad};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             elif choice_update == 6:
                 new_address = input("Enter the new address: ")
                 try:
-                    med.updatevalue(f"UPDATE Aadhaar SET address = '{new_address}' WHERE aadhar = {aad};")
+                    query=f"UPDATE Aadhaar SET address = '{new_address}' WHERE aadhar = {aad};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             else:
@@ -99,7 +103,8 @@ def main():
             hospital_id = int(input("Enter the hospital id: "))
             hospital_name = input("Enter the hospital name: ")
             try:
-                med.insertvalue(f"INSERT INTO Hospital (hospital_id, hospital_name) VALUES ({hospital_id}, '{hospital_name}');")
+                query=f"INSERT INTO Hospital (hospital_id, hospital_name) VALUES ({hospital_id}, '{hospital_name}');"
+                med.insertvalue(query)
             except:
                 print("Error")
                 continue
@@ -108,7 +113,8 @@ def main():
         elif choice == 5:#delete hospital
             hospital_id = int(input("Enter the hospital id to delete: "))
             try:
-                med.deletevalue(f"DELETE FROM Hospital WHERE hospital_id = {hospital_id};")
+                query=f"DELETE FROM Hospital WHERE hospital_id = {hospital_id};"
+                med.deletevalue(query)
             except:
                 print("Error! Unable to Delete")
         
@@ -120,7 +126,8 @@ def main():
             if choice_update == 1:
                 new_hospital_name = input("Enter the new hospital name: ")
                 try:
-                    med.updatevalue(f"UPDATE Hospital SET hospital_name = '{new_hospital_name}' WHERE hospital_id = {hospital_id};")
+                    query=f"UPDATE Hospital SET hospital_name = '{new_hospital_name}' WHERE hospital_id = {hospital_id};"
+                    med.updatevalue(query)
                 except:
                     print("Error! Unable to Update")
             else:
@@ -129,7 +136,8 @@ def main():
         elif choice == 7:#doctor
             doctor_id = int(input("Enter the doctor aadhar id: "))
             try:
-                result = med.queryvalue(f"SELECT first_name, last_name, contact_info FROM Aadhaar WHERE aadhar = {doctor_id};")
+                query=f"SELECT first_name, last_name, contact_info FROM Aadhaar WHERE aadhar = {doctor_id};"
+                result = med.qretiever(query)
                 if result:
                     first_name = f"{result[0][0]}" 
                     last_name = f"{result[0][1]}"
@@ -137,8 +145,8 @@ def main():
                     hospital_id = int(input("Enter the hospital id: "))
                     specialization=input("Enter doctor specialization")
                     try:
-                        med.insertvalue(f"INSERT INTO Doctors (doctor_id, first_name,last_name,contact_info, hospital_id, contact_info, specialization)
-                                 VALUES ({doctor_id}, '{first_name}','{last_name}',{contact_info}, {hospital_id}, {contact_info}, '{specialization}');")
+                        query1=f"INSERT INTO Doctors (doctor_id, first_name,last_name,contact_info, hospital_id, contact_info, specialization) VALUES ({doctor_id}, '{first_name}','{last_name}', {hospital_id}, '{contact_info}', '{specialization}');"
+                        med.insertvalue(query1)
                     except:
                         print("Error")
                         continue
@@ -150,14 +158,16 @@ def main():
         elif choice == 8:
             doctor_id = int(input("Enter the doctor id to delete: "))
             try:
-                med.deletevalue(f"DELETE FROM Doctors WHERE doctor_id = {doctor_id};")
+                query=f"DELETE FROM Doctors WHERE doctor_id = {doctor_id};"
+                med.deletevalue(query)
             except:
                 print("Error! Unable to Delete")
         
         elif choice == 9:#change doctors working hospital
             new_hospital_id = int(input("Enter the new hospital id:"))
             try:
-                med.updatevalue(f"UPDATE Doctors SET hospital_id = {new_hospital_id} WHERE doctor_id = {doctor_id};")
+                query=f"UPDATE Doctors SET hospital_id = {new_hospital_id} WHERE doctor_id = {doctor_id};"
+                med.updatevalue(query)
             except:
                 print("Error! Unable to Update")      
         elif choice == 10:
