@@ -17,8 +17,9 @@ def main():
         print("7. Add new doctor")
         print("8. Delete doctor")
         print("9. Update doctor working hospital")
-        print("10. Logout")
-        print("11. Exit")
+        print("10. Display mode")
+        print("11. Logout")
+        print("12. Exit")
         print("======================================")
         choice = int(input("Enter your choice: "))
         if choice == 1:#add new user
@@ -192,16 +193,44 @@ def main():
                 med.updatevalue(query)
             except:
                 print("Error! Unable to Update")
-            print("UPDATED SUCCESSFULLY")      
-        elif choice == 10:
+            print("UPDATED SUCCESSFULLY")
+
+
+        elif choice==10:
+            dis()
+              
+        elif choice == 11:
             print("Logging out...")
             stat = False
             return
         
-        elif choice == 11:
+        elif choice == 12:
             print("Exiting...")
             stat = False
             exit()
         
         else:
             print("Invalid choice")
+def dis():
+    while True:
+        print("======================================")
+        print("1. View all doctors.")
+        print("2. View Users.")
+        print("3. View Hospitals")
+        print("4. EXIT")
+        print("======================================")
+        choice=int(input("Enter your choice:"))
+        if choice == 1:
+            query = "SELECT * FROM Doctors;"
+            med.display(query)
+        elif choice==2:
+            query = "SELECT * FROM Aadhaar;"
+            med.display(query)
+        elif choice==3:
+            query = "SELECT * FROM Hospital_Details;"
+            med.display(query)
+        elif choice==4:
+            return
+        else:
+            print("Invalid choice")
+            continue

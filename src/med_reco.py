@@ -23,10 +23,13 @@ def display(query):
     # Print the results
     for row in results:
         for ele in row:
-            
+            l=18
             if isinstance(ele, (int, datetime.date, datetime.datetime)):
                 ele = str(ele)
-            print(ele.ljust(15), end=' ')
+            if len(ele)>l:
+                l=35
+            print(ele.ljust(l), end=' ')
+        print()
     print()
     # Close the cursor and connection
     cursor.close()
