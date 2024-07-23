@@ -5,7 +5,7 @@ from PIL import Image, ImageTk  # You need to install Pillow for handling images
 import src.med_reco as sqlcon
 # import src.usermode as userer
 # import src.hospitalmode as hos
-import src.tester as adm
+import tester as adm
 
 class MedicalRecordsApp:
     def __init__(self, root):
@@ -95,7 +95,7 @@ class MedicalRecordsApp:
         query = f"SELECT password FROM Admins WHERE aadhar={id} AND username='{username}';"
         try:
             if sqlcon.qretiever(query)[0][0] == password:
-                adm.main()
+                adm.main(root)
             else:
                 messagebox.showerror("Error", "Invalid Credentials")
         except Exception as e:
@@ -159,12 +159,12 @@ class MedicalRecordsApp:
             treatment_status = simpledialog.askinteger("Input", "Enter 1 if still under treatment or 2 if has recovered:")
 
             if treatment_status == 1:
-                query = f"INSERT INTO Currently_Under_Treatment (hospital_id, patient_id, start_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{drugs_taken}');"
-                sqlcon.qretiever(query)
+                query = f"INSERT INTO Currently_Under_Treatment (hospital_id, patient_id,disease_id, start_date, drugs_taken) VALUES ({id}, {patient_id},{disease_id}, '{start_date}', '{drugs_taken}');"
+                sqlcon.insertvalue(query)
             else:
                 end_date = simpledialog.askstring("Input", "Enter treatment end date (yyyy-mm-dd):")
-                query = f"INSERT INTO Recovered_People (hospital_id, patient_id, start_date, recovery_date, drugs_taken) VALUES ({id}, {patient_id}, '{start_date}', '{end_date}', '{drugs_taken}');"
-                sqlcon.qretiever(query)
+                query = f"INSERT INTO Recovered_People (hospital_id, patient_id,disease_id ,start_date, recovery_date, drugs_taken) VALUES ({id}, {patient_id},{disease_id}, '{start_date}', '{end_date}', '{drugs_taken}');"
+                sqlcon.insertvalue(query)
             messagebox.showinfo("Success", "Patient added successfully!")
 
         tk.Label(self.root, text="Hospital Mode").pack()
@@ -176,5 +176,6 @@ class MedicalRecordsApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
+    root.wm_minsize(960,540)
     app = MedicalRecordsApp(root)
     root.mainloop()

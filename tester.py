@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox, simpledialog
-from PIL import Image, ImageTk  # You need to install Pillow for handling images
-
+from PIL import Image, ImageTk  
+import entry as pl
 import src.med_reco as sqlcon
 
 class MedicalRecordsApp:
-    def __init__(self, root):
+    def __init__(self, root,prev_root):
         self.root = root
+        self.prev_root = prev_root
         self.root.title("Medical Records Tracker")
         self.setup_admin_page()
     def setup_main_page(self):
@@ -27,8 +28,11 @@ class MedicalRecordsApp:
         tk.Button(self.root, text="Delete Doctor", command=self.delete_doctor).pack()
         tk.Button(self.root, text="Update Doctor Working Hospital", command=self.update_doctor_hospital).pack()
         tk.Button(self.root, text="Display Mode", command=self.display_mode).pack()
-        tk.Button(self.root, text="Logout", command=self.setup_main_page).pack()
-
+        tk.Button(self.root, text="Logout", command=self.logout).pack()
+    def logout(self):
+        
+        
+        pl.MedicalRecordsApp(self.root)
     def add_new_user(self):
         aad = simpledialog.askinteger("Input", "Enter the aadhar card no.:")
         firstname = simpledialog.askstring("Input", "Enter the first name:")
@@ -182,14 +186,17 @@ class MedicalRecordsApp:
             return
         
         try:
-            result = sqlcon.display(query)
+            result = sqlcon.qretiever(query)
+            
             display_text = "\n".join(str(record) for record in result)
             messagebox.showinfo("Display", display_text)
         except:
             messagebox.showerror("Error", "Unable to display information.")
-def main():
-    root = tk.Tk()
-    app = MedicalRecordsApp(root)
+def main(root1):
+    root = root1
+    root.wm_minsize(960,640)
+    app = MedicalRecordsApp(root,root1)
     root.mainloop()
+
 
 
