@@ -5,7 +5,7 @@ from PIL import Image, ImageTk  # You need to install Pillow for handling images
 import src.med_reco as sqlcon
 # import src.usermode as userer
 # import src.hospitalmode as hos
-# import src.adminmode as adm
+import src.tester as adm
 
 class MedicalRecordsApp:
     def __init__(self, root):
