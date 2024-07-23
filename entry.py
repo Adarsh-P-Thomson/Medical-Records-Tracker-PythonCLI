@@ -20,7 +20,7 @@ class MedicalRecordsApp:
         
         # Add logo
         logo = Image.open("logo.png")
-        logo = logo.resize((200, 200), Image.LANCZOS)
+        logo = logo.resize((150, 150), Image.LANCZOS)
         logo = ImageTk.PhotoImage(logo)
         logo_label = tk.Label(self.root, image=logo)
         logo_label.image = logo  # Keep a reference!
@@ -28,28 +28,36 @@ class MedicalRecordsApp:
 
         # User mode
         tk.Label(self.root, text="User Mode").pack()
+        tk.Label(root, text="Aadhar Card no:").pack()
         self.user_id_entry = tk.Entry(self.root)
         self.user_id_entry.pack()
+        tk.Label(root, text="Password:").pack()
         self.user_password_entry = tk.Entry(self.root, show='*')
         self.user_password_entry.pack()
         tk.Button(self.root, text="Login as User", command=self.on_user_mode).pack()
 
         # Hospital mode
-        tk.Label(self.root, text="Hospital Mode").pack()
+        tk.Label(self.root, text="-----------------------------------------------\nHospital Mode").pack()
+        tk.Label(root, text="Username:").pack()
         self.hospital_username_entry = tk.Entry(self.root)
         self.hospital_username_entry.pack()
+        tk.Label(root, text="ID:").pack()
         self.hospital_id_entry = tk.Entry(self.root)
         self.hospital_id_entry.pack()
+        tk.Label(root, text="Password:").pack()
         self.hospital_password_entry = tk.Entry(self.root, show='*')
         self.hospital_password_entry.pack()
         tk.Button(self.root, text="Login as Hospital", command=self.on_hospital_mode).pack()
 
         # Admin mode
-        tk.Label(self.root, text="Admin Mode").pack()
+        tk.Label(self.root, text="-----------------------------------------------\nAdmin Mode").pack()
+        tk.Label(root, text="Username:").pack()
         self.admin_username_entry = tk.Entry(self.root)
         self.admin_username_entry.pack()
+        tk.Label(root, text="Aadhar ID:").pack()
         self.admin_id_entry = tk.Entry(self.root)
         self.admin_id_entry.pack()
+        tk.Label(root, text="Password:").pack()
         self.admin_password_entry = tk.Entry(self.root, show='*')
         self.admin_password_entry.pack()
         tk.Button(self.root, text="Login as Admin", command=self.on_admin_mode).pack()
@@ -176,6 +184,6 @@ class MedicalRecordsApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.wm_minsize(960,540)
+    root.wm_minsize(960,720)
     app = MedicalRecordsApp(root)
     root.mainloop()
