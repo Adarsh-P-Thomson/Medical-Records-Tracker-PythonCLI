@@ -12,7 +12,6 @@ A command-line interface (CLI) tool written in Python for managing medical recor
 - [Usage](#usage)  
 - [Project Structure](#project-structure)  
 - [Contributing](#contributing)  
-- [License](#license)
 
 ---
 
